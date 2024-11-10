@@ -1,0 +1,431 @@
+body {
+    background-color: black;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 3rem;
+    white-space: nowrap;
+    position: relative;
+}
+
+/* Blinking cursor */
+h1::after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background-color: white;
+    animation: blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+    from, to { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Main content section styling */
+#main-content {
+    font-family: 'Courier New', Courier, monospace; /* Set font to match typewriter title */
+    padding: 100px 0; /* Maintain padding for spacing */
+    text-align: center;
+    font-size: 2rem; /* Larger font size for main content */
+    line-height: 1.6;
+    color: #fff; /* White text color */
+    background: none; /* Remove white background */
+    margin: 5% 20%; /* Center content */
+}
+
+/* Ensure main content is positioned below the arrow */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-bottom: 20px; /* Additional margin to separate from content */
+}
+
+/* Arrow styles (unchanged) */
+.arrow {
+    border: solid white;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 15px;
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    border-radius: 3px;
+    opacity: 0;
+    cursor: pointer;
+    visibility: hidden; /* Start with arrow hidden */
+}
+
+/* Separate classes for visibility and animations */
+.arrow.visible {
+    visibility: visible;
+    animation: fadeInArrow 2s ease forwards, breathe 4s infinite 2s;
+}
+
+@keyframes fadeInArrow {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(45deg);
+    }
+}
+
+@keyframes breathe {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+
+/* Initially, no blur effect on the video */
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1; /* Ensure the video is behind other content */
+    transition: backdrop-filter 0.5s ease; /* Smooth transition for blur effect */
+}
+
+/* Apply blur when scrolling past the typewriter */
+.video-blur {
+    backdrop-filter: blur(8px); /* Adjust blur intensity as needed */
+}
+
+
+/* Fullscreen background video */
+#bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+}
+
+.video-overlay {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.6); /* Initial dimming */
+   transition: background-color 0.5s ease; /* Smooth transition */
+}
+
+/* Additional dimming class */
+.video-overlay.dimmer {
+   background-color: rgba(0, 0, 0, 0.8); /* Darker overlay when scrolled to nav */
+}
+
+
+/* Blur class for scrolling past typewriter section */
+.blur {
+    filter: blur(6px);
+}
+
+
+/* Nav container styling */
+.nav-container {
+    display: flex;
+    align-items: flex-start;
+    margin: 30% 0 40% 2%;
+    width: 100%; /* Add this to allow proper centering */
+}
+
+/* Vertical nav styling */
+.vertical-nav {
+    position: relative;
+    padding: 20px;
+    margin: 20% 0 35% 0;
+    width: 200px; /* Fixed width for main nav */
+}
+
+.vertical-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.vertical-nav li {
+    margin: 30px 0; /* Increased spacing between items */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+/* Underline animation container */
+.vertical-nav li span {
+    position: relative;
+    display: inline-block;
+}
+
+/* Underline effect */
+.vertical-nav li span::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px; /* Adjust distance of underline from text */
+    left: 50%;
+    background-color: white;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+/* Hover effect */
+.vertical-nav li:hover span::after {
+    width: 100%;
+}
+
+
+/* Base styles for mobile first approach */
+.connect-links {
+    position: relative;
+    width: 100%;
+    margin: 5rem 0;
+    padding: 0 1rem;
+}
+
+.connect-links ul {
+    display: flex;
+    flex-direction: column; /* Stack vertically on mobile */
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Tablet breakpoint */
+@media screen and (min-width: 768px) {
+    .connect-links {
+        flex-grow: 1;
+        margin: 30px 0;
+        padding-left: 5vw;
+    }
+
+    .connect-links ul {
+        flex-direction: row; /* Horizontal on larger screens */
+        gap: 3rem;
+    }
+}
+
+/* Desktop breakpoint */
+@media screen and (min-width: 1024px) {
+    .connect-links {
+        margin-top: 30px;
+        margin-left: 15vw;
+        padding-right: 15vw;
+    }
+}
+
+/* Large screens and 4K */
+@media screen and (min-width: 1440px) {
+    .connect-links {
+        margin-left: 34.5vw;
+        margin-top: 20vw;
+        margin-bottom: -20vw;
+        padding-right: 20vw;
+    }
+}
+
+
+
+/* Common styles for both navigations */
+.vertical-nav ul,
+.connect-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.vertical-nav li,
+.connect-links li {
+    margin: 30px 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+/* For connect links, override vertical margin */
+.connect-links li {
+    margin: 0;
+}
+
+/* Underline animation container */
+.vertical-nav li span,
+.connect-links li span {
+    position: relative;
+    display: inline-block;
+}
+
+.vertical-nav li span::after,
+.connect-links li span::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: white;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+/* Hover effect */
+.connect-links li:hover span::after {
+    width: 100%;
+}
+
+/* Animation for appearing/disappearing */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s forwards;
+}
+
+.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+/* Projects section styling */
+.projects-section {
+    position: relative;
+    flex-grow: 1;
+    margin-top: -340px;
+    margin-left: 17rem;
+    padding-right: 15vw;
+    margin-bottom: -30rem;
+    animation: fadeIn 0.5s forwards;
+}
+
+.project-category {
+    margin-bottom: 9rem;
+    text-align: left;
+}
+
+.project-category h2 {
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    opacity: 0.7;
+}
+
+.project-category ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.5rem 0;
+    display: flex;
+    flex-direction: column; /* Ensure horizontal layout */
+    gap: 4rem; /* Spacing between projects */
+    flex-wrap: nowrap; /* Prevent wrapping */
+}
+
+.project-category li {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap; /* Keep text in one line */
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+/* Underline animation for projects */
+.project-category li span {
+    position: relative;
+    display: inline-block;
+}
+
+.project-category li span::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: white;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.project-category li:hover span::after {
+    width: 100%;
+}
+
+/* Animation for appearing/disappearing */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s forwards;
+}
+
+.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1200px) {
+    .projects-section {
+        margin-left: 30vw;
+        padding-right: 10vw;
+    }
+
+    .project-category ul {
+        gap: 3rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .project-category ul {
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        justify-content: flex-start;
+
+        gap: 2rem;
+    }
+    .projects-section{
+     margin-top: 5rem;
+        margin-bottom: auto;
+    }
+}
