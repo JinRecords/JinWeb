@@ -250,6 +250,11 @@ document.addEventListener('DOMContentLoaded', function () {
         window.open('https://github.com/JinRecords/JinWeb', '_blank');
     });
 
+        const soundcloudLink = document.querySelector('.soundcloud-link');
+    soundcloudLink.addEventListener('click', function () {
+        window.open('https://soundcloud.com/jin_records', '_blank');
+    });
+
     // Connect button functionality
     const connectLink = document.querySelector('.vertical-nav li:nth-child(2)');
     const connectLinks = document.querySelector('.connect-links');

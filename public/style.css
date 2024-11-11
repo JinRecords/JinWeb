@@ -167,6 +167,7 @@ h1::after {
     font-size: 2rem;
     color: white;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .vertical-nav li span {
@@ -191,10 +192,11 @@ h1::after {
 }
 
 .connect-links {
-    position: relative;
-    width: 100%;
-    margin: 5rem 0;
+    margin: 4rem 0;
     padding: 0 1rem;
+    position: absolute; /* Add this */
+    width: auto; /* Add this */
+    white-space: nowrap; /* Add this to prevent text wrapping */
 }
 
 .connect-links ul {
@@ -228,7 +230,7 @@ h1::after {
 
 @media screen and (min-width: 1440px) {
     .connect-links {
-        margin-left: 34.5vw;
+        margin-left: 29.5vw;
         margin-top: 20vw;
         margin-bottom: -20vw;
         padding-right: 20vw;
@@ -572,8 +574,8 @@ h1::after {
     }
 
     .connect-links {
-        padding-top: 3rem;
-        padding-left: 15rem;
+        padding-top: 4rem;
+        padding-left: 10rem;
         position: absolute; /* Add this */
         width: auto; /* Add this */
         white-space: nowrap; /* Add this to prevent text wrapping */
