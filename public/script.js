@@ -15,10 +15,31 @@ window.onbeforeunload = function () {
     window.scrollTo(0, 0);
 };
 
+// Add this function to check for mobile devices
 function isMobileDevice() {
     return (window.innerWidth <= 768) ||
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+           /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
+
+// Add this to your DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', function() {
+    const mainContent = document.getElementById('main-content');
+
+    function toggleParagraphVisibility() {
+        if (isMobileDevice()) {
+            mainContent.style.display = 'none';
+        } else {
+            mainContent.style.display = 'block';
+        }
+    }
+
+    // Check on page load
+    toggleParagraphVisibility();
+
+    // Check when window is resized
+    window.addEventListener('resize', toggleParagraphVisibility);
+});
+
 
 document.body.classList.add('no-scroll'); // Make body unscrollable initially
 function updateArrowVisibility() {
@@ -90,30 +111,20 @@ function showBackgroundVideo() {
 
 function typeWriter() {
     const isMobile = isMobileDevice();
-    const phases = isMobile ? [{
-        text: "Hello, World!",
-        action: "type"
-    }, {
-        text: "Hello,",
-        action: "backspace"
-    }, {
-        text: "Hello, please use desktop view.",
-        action: "type"
-    }] : [{
-        text: "Hello, World!",
-        action: "type"
-    }, {
-        text: "Hello,",
-        action: "backspace"
-    }, {
-        text: "Hello, I'm Jin.",
-        action: "type"
-    }];
+    const phases = isMobile ? [
+        {text: "Hello, World!", action: "type"},
+        {text: "Hello,", action: "backspace"},
+        {text: "Hello, please use\ndesktop view.", action: "type"}
+    ] : [
+        {text: "Hello, World!", action: "type"},
+        {text: "Hello,", action: "backspace"},
+        {text: "Hello, I'm Jin.", action: "type"}
+    ];
 
     if (phase === 0) {
         if (currentText.length < phases[0].text.length) {
             currentText += phases[0].text[currentText.length];
-            textElement.textContent = currentText;
+            textElement.innerHTML = currentText.replace(/\n/g, '<br>');
             setTimeout(typeWriter, 50);
         } else {
             setTimeout(() => {
@@ -124,7 +135,7 @@ function typeWriter() {
     } else if (phase === 1) {
         if (currentText.length > phases[1].text.length) {
             currentText = currentText.slice(0, -1);
-            textElement.textContent = currentText;
+            textElement.innerHTML = currentText.replace(/\n/g, '<br>');
             setTimeout(typeWriter, 30);
         } else {
             phase = 2;
@@ -134,20 +145,19 @@ function typeWriter() {
         const targetText = phases[2].text;
         if (currentText.length < targetText.length) {
             currentText = targetText.slice(0, currentText.length + 1);
-            textElement.textContent = currentText;
+            textElement.innerHTML = currentText.replace(/\n/g, '<br>');
             setTimeout(typeWriter, 100);
         } else {
             if (!isMobile) {
-                // Only enable scrolling and show arrow for desktop
                 setTimeout(() => {
                     document.body.classList.remove('no-scroll');
                     createArrow();
                 }, 500);
             }
-            // For mobile, keep the site unscrollable
         }
     }
 }
+
 
 
 window.addEventListener('resize', function () {

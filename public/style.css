@@ -17,12 +17,14 @@ h1 {
 h1::after {
     content: '';
     position: absolute;
-    right: -5px;
-    top: 0;
-    height: 100%;
+    height: 50%;
     width: 3px;
     background-color: white;
     animation: blink-caret 0.75s step-end infinite;
+    margin-left: 5px;
+    /* Position the caret at the bottom line for mobile */
+    bottom: 0;
+
 }
 
 @keyframes blink-caret {
