@@ -64,19 +64,31 @@ function createArrow() {
 
     arrowElement.addEventListener('click', function () {
         const mainContent = document.getElementById('main-content');
+        const verticalNav = document.querySelector('.vertical-nav');
         const windowHeight = window.innerHeight;
         const contentHeight = mainContent.offsetHeight;
         const currentScroll = window.scrollY;
         const paragraphPosition = mainContent.offsetTop - (windowHeight - contentHeight) / 2;
+        const navPosition = verticalNav.offsetTop;
 
-        if (currentScroll >= paragraphPosition) {
-            window.scrollTo({
-                top: document.documentElement.scrollHeight,
-                behavior: 'smooth'
-            });
-        } else {
+        // If we haven't reached the main content yet, scroll to it
+        if (currentScroll < paragraphPosition * 0.9) {
             window.scrollTo({
                 top: paragraphPosition,
+                behavior: 'smooth'
+            });
+        }
+        // If we're at main content but not at nav, scroll to nav
+        else if (currentScroll <= navPosition) {
+            window.scrollTo({
+                top: navPosition,
+                behavior: 'smooth'
+            });
+        }
+        // If we're already at nav, scroll to bottom
+        else {
+            window.scrollTo({
+                top: document.documentElement.scrollHeight,
                 behavior: 'smooth'
             });
         }
@@ -86,10 +98,8 @@ function createArrow() {
         arrowElement.classList.add('visible');
         showBackgroundVideo();
     }, 1000);
-
-    // Add initial check for arrow visibility
-    updateArrowVisibility();
 }
+
 
 // Add scroll event listener to update arrow visibility
 window.addEventListener('scroll', updateArrowVisibility);
@@ -111,13 +121,13 @@ function showBackgroundVideo() {
 function typeWriter() {
     const isMobile = isMobileDevice();
     const phases = isMobile ? [
-        {text: "Hello, World!", action: "type"},
-        {text: "Hello,", action: "backspace"},
-        {text: "Hello, \nplease use\ndesktop view.", action: "type"}
+        {text: "> Hello, World!", action: "type"},
+        {text: "> Hello,", action: "backspace"},
+        {text: "> Hello, \nplease use\ndesktop view.", action: "type"}
     ] : [
-        {text: "Hello, World!", action: "type"},
-        {text: "Hello,", action: "backspace"},
-        {text: "Hello, I'm Jin.", action: "type"}
+        {text: "> Hello, World!", action: "type"},
+        {text: "> Hello,", action: "backspace"},
+        {text: "> Hello, I'm Jin.", action: "type"}
     ];
 
     if (phase === 0) {
@@ -555,7 +565,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     const infoMessage = document.getElementById('info-message');
-    const verticalNav = document.querySelector('.vertical-nav');
+    const verticalNav = document.querySelector('.vertical-nav ul');
     let messageShown = false;
     let messageRemoved = false;
     let lastScrollPosition = window.pageYOffset;
@@ -567,7 +577,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const currentScrollPosition = window.pageYOffset;
         const navPosition = verticalNav.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
-        const scrollThreshold = windowHeight * 0.75;
+        const isPortrait = window.innerHeight > window.innerWidth;
+        const scrollThreshold = isPortrait ? windowHeight * 0.5 : windowHeight * 0.75;
 
         // Check scroll direction
         const isScrollingUp = currentScrollPosition < lastScrollPosition;

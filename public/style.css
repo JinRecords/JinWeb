@@ -491,8 +491,8 @@ h1::after {
 @media screen and (max-width: 1200px) {
     /* Navigation container adjustments */
     .nav-container {
-        margin: 50rem 0 60rem;
-        width: 100%;
+        margin: 50rem 0 60rem 0;
+        width: 20%;
         position: relative;
         z-index: 2;
     }
@@ -507,12 +507,14 @@ h1::after {
     .vertical-nav li {
         font-size: 1.5rem; /* Smaller font size for mobile */
         margin: 15px 0;
+
+
     }
 
     /* Projects section adjustments */
     .projects-section {
         position: relative;
-        margin-top: -60rem;
+        margin-top: -55rem;
         margin-left: 0;
         padding: 20px;
         width: 100%;
@@ -530,9 +532,9 @@ h1::after {
 
     /* Project description text */
     .project-description {
-        font-size: 1rem;
+        font-size: 1.5rem;
         line-height: 1.4;
-        width: 100%;
+        width: 90%;
         word-wrap: break-word;
         white-space: normal;
     }
@@ -540,9 +542,9 @@ h1::after {
     /* Media grid adjustments */
     .media-grid {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 10px;
-        width: 20%;
+        width: 80%;
     }
 
     .media-item {
@@ -564,8 +566,22 @@ h1::after {
     }
 
     .project-tags li {
-        font-size: 0.9rem;
-        margin: 2px;
+        font-size: 1.5rem;
+        margin: 20px;
+    }
+
+    .connect-links {
+        padding-top: 3rem;
+        padding-left: 15rem;
+        position: absolute; /* Add this */
+        width: auto; /* Add this */
+        white-space: nowrap; /* Add this to prevent text wrapping */
+    }
+
+    .connect-links ul {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
     }
 }
 
