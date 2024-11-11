@@ -1,5 +1,6 @@
 {
   "hosting": {
+"site": "jinrec",
     "public": "public",
     "ignore": [
       "firebase.json",

@@ -14,7 +14,6 @@ h1 {
     position: relative;
 }
 
-/* Blinking cursor */
 h1::after {
     content: '';
     position: absolute;
@@ -27,33 +26,34 @@ h1::after {
 }
 
 @keyframes blink-caret {
-    from, to { opacity: 1; }
-    50% { opacity: 0; }
+    from, to {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
 }
 
-/* Main content section styling */
 #main-content {
-    font-family: 'Courier New', Courier, monospace; /* Set font to match typewriter title */
-    padding: 100px 0; /* Maintain padding for spacing */
+    font-family: 'Courier New', Courier, monospace;
+    padding: 100px 0;
     text-align: center;
-    font-size: 2rem; /* Larger font size for main content */
+    font-size: 2rem;
     line-height: 1.6;
-    color: #fff; /* White text color */
-    background: none; /* Remove white background */
-    margin: 5% 20%; /* Center content */
+    color: #fff;
+    background: none;
+    margin: 5% 20%;
 }
 
-/* Ensure main content is positioned below the arrow */
 .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin-bottom: 20px; /* Additional margin to separate from content */
+    margin-bottom: 20px;
 }
 
-/* Arrow styles (unchanged) */
 .arrow {
     border: solid white;
     border-width: 0 4px 4px 0;
@@ -66,10 +66,9 @@ h1::after {
     border-radius: 3px;
     opacity: 0;
     cursor: pointer;
-    visibility: hidden; /* Start with arrow hidden */
+    visibility: hidden;
 }
 
-/* Separate classes for visibility and animations */
 .arrow.visible {
     visibility: visible;
     animation: fadeInArrow 2s ease forwards, breathe 4s infinite 2s;
@@ -95,8 +94,6 @@ h1::after {
     }
 }
 
-
-/* Initially, no blur effect on the video */
 .video-container {
     position: fixed;
     top: 0;
@@ -104,17 +101,15 @@ h1::after {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: -1; /* Ensure the video is behind other content */
-    transition: backdrop-filter 0.5s ease; /* Smooth transition for blur effect */
+    z-index: -1;
+    transition: backdrop-filter 0.5s ease;
+    background-color: black;
 }
 
-/* Apply blur when scrolling past the typewriter */
 .video-blur {
-    backdrop-filter: blur(8px); /* Adjust blur intensity as needed */
+    backdrop-filter: blur(8px);
 }
 
-
-/* Fullscreen background video */
 #bg-video {
     position: absolute;
     top: 50%;
@@ -127,41 +122,35 @@ h1::after {
 }
 
 .video-overlay {
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   background-color: rgba(0, 0, 0, 0.6); /* Initial dimming */
-   transition: background-color 0.5s ease; /* Smooth transition */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    transition: background-color 0.5s ease;
 }
 
-/* Additional dimming class */
 .video-overlay.dimmer {
-   background-color: rgba(0, 0, 0, 0.8); /* Darker overlay when scrolled to nav */
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-
-/* Blur class for scrolling past typewriter section */
 .blur {
     filter: blur(6px);
 }
 
-
-/* Nav container styling */
 .nav-container {
     display: flex;
     align-items: flex-start;
-    margin: 30% 0 40% 2%;
-    width: 100%; /* Add this to allow proper centering */
+    margin: 30% 0 20% 2%;
+    width: 100%;
 }
 
-/* Vertical nav styling */
 .vertical-nav {
     position: relative;
     padding: 20px;
-    margin: 20% 0 35% 0;
-    width: 200px; /* Fixed width for main nav */
+    margin: 20% 0 34.5% 0;
+    width: 200px;
 }
 
 .vertical-nav ul {
@@ -171,39 +160,34 @@ h1::after {
 }
 
 .vertical-nav li {
-    margin: 30px 0; /* Increased spacing between items */
+    margin: 30px 0;
     font-family: 'Courier New', Courier, monospace;
     font-size: 2rem;
     color: white;
     cursor: pointer;
 }
 
-/* Underline animation container */
 .vertical-nav li span {
     position: relative;
     display: inline-block;
 }
 
-/* Underline effect */
 .vertical-nav li span::after {
     content: '';
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: -5px; /* Adjust distance of underline from text */
+    bottom: -5px;
     left: 50%;
     background-color: white;
     transform: translateX(-50%);
     transition: width 0.3s ease;
 }
 
-/* Hover effect */
 .vertical-nav li:hover span::after {
     width: 100%;
 }
 
-
-/* Base styles for mobile first approach */
 .connect-links {
     position: relative;
     width: 100%;
@@ -213,13 +197,12 @@ h1::after {
 
 .connect-links ul {
     display: flex;
-    flex-direction: column; /* Stack vertically on mobile */
+    flex-direction: column;
     gap: 1.5rem;
     justify-content: center;
     align-items: center;
 }
 
-/* Tablet breakpoint */
 @media screen and (min-width: 768px) {
     .connect-links {
         flex-grow: 1;
@@ -228,12 +211,11 @@ h1::after {
     }
 
     .connect-links ul {
-        flex-direction: row; /* Horizontal on larger screens */
+        flex-direction: row;
         gap: 3rem;
     }
 }
 
-/* Desktop breakpoint */
 @media screen and (min-width: 1024px) {
     .connect-links {
         margin-top: 30px;
@@ -242,7 +224,6 @@ h1::after {
     }
 }
 
-/* Large screens and 4K */
 @media screen and (min-width: 1440px) {
     .connect-links {
         margin-left: 34.5vw;
@@ -252,9 +233,6 @@ h1::after {
     }
 }
 
-
-
-/* Common styles for both navigations */
 .vertical-nav ul,
 .connect-links ul {
     list-style: none;
@@ -271,12 +249,10 @@ h1::after {
     cursor: pointer;
 }
 
-/* For connect links, override vertical margin */
 .connect-links li {
     margin: 0;
 }
 
-/* Underline animation container */
 .vertical-nav li span,
 .connect-links li span {
     position: relative;
@@ -296,20 +272,26 @@ h1::after {
     transition: width 0.3s ease;
 }
 
-/* Hover effect */
 .connect-links li:hover span::after {
     width: 100%;
 }
 
-/* Animation for appearing/disappearing */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 .fade-in {
@@ -320,14 +302,13 @@ h1::after {
     animation: fadeOut 0.5s forwards;
 }
 
-/* Projects section styling */
 .projects-section {
     position: relative;
     flex-grow: 1;
-    margin-top: -340px;
+    margin-top: -365px;
     margin-left: 17rem;
     padding-right: 15vw;
-    margin-bottom: -30rem;
+    margin-bottom: -28.15rem;
     animation: fadeIn 0.5s forwards;
 }
 
@@ -349,9 +330,9 @@ h1::after {
     padding: 0;
     margin: 0 0 0.5rem 0;
     display: flex;
-    flex-direction: column; /* Ensure horizontal layout */
-    gap: 4rem; /* Spacing between projects */
-    flex-wrap: nowrap; /* Prevent wrapping */
+    flex-direction: column;
+    gap: 4rem;
+    flex-wrap: nowrap;
 }
 
 .project-category li {
@@ -359,12 +340,11 @@ h1::after {
     font-size: 1.5rem;
     color: white;
     cursor: pointer;
-    white-space: nowrap; /* Keep text in one line */
+    white-space: nowrap;
     margin-bottom: 0;
     margin-top: 0;
 }
 
-/* Underline animation for projects */
 .project-category li span {
     position: relative;
     display: inline-block;
@@ -386,15 +366,22 @@ h1::after {
     width: 100%;
 }
 
-/* Animation for appearing/disappearing */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
 
 .fade-in {
@@ -405,7 +392,6 @@ h1::after {
     animation: fadeOut 0.5s forwards;
 }
 
-/* Responsive adjustments */
 @media screen and (max-width: 1200px) {
     .projects-section {
         margin-left: 30vw;
@@ -419,13 +405,193 @@ h1::after {
 
 @media screen and (max-width: 768px) {
     .project-category ul {
-        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        flex-wrap: wrap;
         justify-content: flex-start;
-
         gap: 2rem;
     }
-    .projects-section{
-     margin-top: 5rem;
+
+    .projects-section {
+        margin-top: 5rem;
         margin-bottom: auto;
     }
+}
+
+.project-details {
+    position: absolute;
+    left: calc(230%);
+    top: 0;
+    width: 40vw;
+    max-height: 80vh;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+.project-content {
+    margin-bottom: 2rem;
+}
+
+.project-description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: white;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.project-description a {
+    color: white;
+    text-decoration: underline;
+}
+
+.project-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem !important;
+}
+
+.project-tags li {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: default;
+}
+
+.media-grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.media-item {
+    flex: 0 0 20%;
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.media-item img {
+    object-fit: cover;
+}
+
+.media-item img,
+.media-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 1024px) {
+    .project-details {
+        position: static;
+        width: 100%;
+        margin-top: 5rem;
+    }
+
+    .media-grid {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .media-item {
+        flex: 0 0 80%;
+        margin-right: 1rem;
+    }
+}
+
+.play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 100px;
+    color: white;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+.centered-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: none;
+    z-index: 1;
+}
+
+.media-grid {
+    gap: 0px;
+    justify-content: center;
+}
+
+@media screen and (max-width: 1024px) {
+    .media-item.vertical {
+        flex: 0 0 60%;
+    }
+}
+
+.video-container {
+    background-color: black;
+    overflow: hidden;
+}
+
+.vertical-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 100% !important;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.vertical-video video {
+    width: auto;
+    height: 100% !important;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+.guide-text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.guide-text.visible {
+    opacity: 1;
+}
+
+.info-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+    z-index: 10;
+    text-align: center;
+    display: none;
 }

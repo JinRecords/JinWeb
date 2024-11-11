@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jin's Portfolio</title>
+    <title>Jin</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -35,38 +35,185 @@
             <li><span><b>Connect</b></span></li>
             <li><span class="resume-link"><b>Resume</b></span></li>
             <li><span class="github-link"><b>Github</b></span></li>
+            <li><span class="source-link"><b>Code</b></span></li>
         </ul>
 
-<div class="connect-links" style="display: none;">
-    <ul>
-        <li><span class="linkedin-link">LinkedIn</span></li>
-        <li><span class="bluesky-link">BlueSky</span></li>
-        <li><span class="instagram-link">Instagram</span></li>
-    </ul>
-</div>
+        <div class="connect-links" style="display: none;">
+            <ul>
+                <li><span class="linkedin-link">LinkedIn</span></li>
+                <li><span class="bluesky-link">BlueSky</span></li>
+                <li><span class="instagram-link">Instagram</span></li>
+            </ul>
+        </div>
 
     </div>
 
-<div class="projects-section" style="display: none;">
-    <div class="project-category">
-        <h2><b>Client Projects</b></h2>
-        <ul>
-            <li><span>Sunway Pyramid<br>Lighting Project</span></li>
-            <li><span>Monocon2022@TOA</span></li>
-        </ul>
-    </div>
+    <div class="projects-section" style="display: none;">
+        <div class="project-category">
+            <h2><b>Client Projects</b></h2>
+            <ul>
+                <li>
+                    <span class="pyramid-trigger">Sunway Pyramid<br>Lighting Project</span>
+                    <div class="project-details" style="display: none;">
+                        <div class="project-content">
+                            <p class="project-description">
+                                11 sets of monochrome visuals with 4 RGB beacons at the top, it is for the Sunway
+                                Pyramid
+                                Lighting Project and was made fully on Touch Designer. All visuals are unique.
+                                Originally,
+                                15 sets were proposed, but only 11 got chosen at the end.
+                            </p>
+                            <ul class="project-tags">
+                                <li>#TouchDesigner</li>
+                            </ul>
+                        </div>
+                        <div class="media-grid">
+                            <div class="media-item" data-media="media/pyramid/pyramid1.mp4">
+                                <video src="media/pyramid/pyramid1.mp4"></video>
+                                <div class="play-icon">&#9658;</div>
+                            </div>
+                            <div class="media-item vertical" data-media="media/pyramid/pyramid2.mp4">
+                                <video src="media/pyramid/pyramid2.mp4"></video>
+                                <div class="play-icon">&#9658;</div>
+                            </div>
+                            <div class="media-item" data-media="media/pyramid/pyramid3.jpg">
+                                <img src="media/pyramid/pyramid3.jpg" alt="Pyramid 3">
+                            </div>
+                            <div class="media-item" data-media="media/pyramid/pyramid4.jpg">
+                                <img src="media/pyramid/pyramid4.jpg" alt="Pyramid 4">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <span class="monocon-trigger">Monocon2022@TOA</span>
+                    <div class="project-details" style="display: none;">
+                        <div class="project-content">
+                            <p class="project-description">
+                                8 sets of audio/video reactive visuals for Monocon 2022 developed fully on
+                                TouchDesigner.
+                                The visuals range from simple 2d graphics all the way to Nvidia accelerated fluid
+                                simulation.
+                                The visuals are real-time, and the LED displays are arranged uniquely to provide depth.
+                            </p>
+                            <ul class="project-tags">
+                                <li>#TouchDesigner</li>
+                                <li>#InteractiveMedia</li>
+                                <li>#Music</li>
+                            </ul>
+                        </div>
+                        <div class="media-grid">
+                            <div class="media-item horizontal" data-media="media/monocon/mono1.mp4">
+                                <video src="media/monocon/mono1.mp4"></video>
+                                <div class="play-icon">&#9658;</div>
+                            </div>
+                            <div class="media-item vertical" data-media="media/monocon/mono2.mp4">
+                                <video src="media/monocon/mono2.mp4"></video>
+                                <div class="play-icon">&#9658;</div>
+                            </div>
+                            <div class="media-item vertical" data-media="media/monocon/mono3.mp4">
+                                <video src="media/monocon/mono3.mp4"></video>
+                                <div class="play-icon">&#9658;</div>
+                            </div>
+                            <div class="media-item vertical" data-media="media/monocon/mono4.mp4">
+                                <video src="media/monocon/mono4.mp4"></video>
+                                <div class="play-icon">&#9658;</div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
-    <div class="project-category">
-        <h2><b>Personal Projects</b></h2>
-        <ul>
-            <li><span>Electronic instrument -<br>Haxophone</span></li>
-            <li><span>Self fabricated<br>Split Ergo Keyboard</span></li>
-        </ul>
+        <div class="project-category">
+            <h2>Personal Projects</h2>
+            <ul>
+                <li>
+                    <span class="haxophone-trigger">Electronic instrument -<br>Haxophone</span>
+                    <div class="project-details" style="display: none;">
+                        <div class="project-content">
+                            <p class="project-description">
+                                A digital saxophone, featuring analogue breath sensing, built-in synthesiser with over
+                                200+
+                                instruments, real-time midi output. It is fully hand made. The project is a modified
+                                version of
+                                Javier Cardona's <a href="https://github.com/cardonabits/haxo-hw" target="_blank">Haxophone</a>.
+                            </p>
+                            <ul class="project-tags">
+                                <li>#RaspberryPi</li>
+                                <li>#Music</li>
+                                <li>#KiCAD</li>
+                                <li>#OnShape</li>
+                                <li>#Soldering</li>
+                                <li>#3DPrinting</li>
+                            </ul>
+                        </div>
+                        <div class="media-grid">
+                            <div class="media-item" data-media="media/haxo/haxo1.jpg">
+                                <img src="media/haxo/haxo1.jpg" alt="Haxophone 1">
+                            </div>
+                            <div class="media-item" data-media="media/haxo/haxo2.jpg">
+                                <img src="media/haxo/haxo2.jpg" alt="Haxophone 2">
+                            </div>
+                            <div class="media-item" data-media="media/haxo/haxo3.jpg">
+                                <img src="media/haxo/haxo3.jpg" alt="Haxophone 3">
+                            </div>
+                            <div class="media-item" data-media="media/haxo/haxo.mp4">
+                                <video src="media/haxo/haxo.mp4"></video>
+                                <div class="play-icon">&#9658;</div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <span class="splitkeeb-trigger">Self fabricated<br>Split Ergo Keyboard</span>
+                    <div class="project-details" style="display: none;">
+                        <div class="project-content">
+                            <p class="project-description">
+                                A self developed programmable wireless split ergonomic keyboard with custom PCB,
+                                3d printed case and fully hand assembled. The keyboard works with the open source
+                                <a href="https://github.com/zmkfirmware/zmk/" target="_blank">ZMK</a>,
+                                therefore it is incredibly customizable.
+                            </p>
+                            <ul class="project-tags">
+                                <li>#Arduino</li>
+                                <li>#OnShape</li>
+                                <li>#3DPrinting</li>
+                                <li>#Soldering</li>
+                                <li>#KiCAD</li>
+                            </ul>
+                        </div>
+                        <div class="media-grid">
+                            <div class="media-item" data-media="media/splitkeeb/splitkeeb1.jpg">
+                                <img src="media/splitkeeb/splitkeeb1.jpg" alt="Split Keyboard 1">
+                            </div>
+                            <div class="media-item" data-media="media/splitkeeb/splitkeeb2.jpg">
+                                <img src="media/splitkeeb/splitkeeb2.jpg" alt="Split Keyboard 2">
+                            </div>
+                            <div class="media-item" data-media="media/splitkeeb/splitkeeb3.jpg">
+                                <img src="media/splitkeeb/splitkeeb3.jpg" alt="Split Keyboard 3">
+                            </div>
+                            <div class="media-item" data-media="media/splitkeeb/splitkeeb4.jpg">
+                                <img src="media/splitkeeb/splitkeeb4.jpg" alt="Split Keyboard 4">
+                            </div>
+                            <div class="media-item" data-media="media/splitkeeb/splitkeeb.mp4">
+                                <video src="media/splitkeeb/splitkeeb.mp4"></video>
+                                <div class="play-icon">&#9658;</div> <!-- Play icon -->
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
     </div>
-</div>
 
 </nav>
 
+<div id="info-message" class="info-message">
+    <b>Click on the left navigation to get started, hover on media thumbnail to view</b>
+</div>
 
 
 
