@@ -233,8 +233,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const resumeLink = document.querySelector('.resume-link');
     resumeLink.addEventListener('click', function () {
         const link = document.createElement('a');
-        link.href = 'media/resume.pdf';
-        link.download = 'resume.pdf';
+        link.href = 'resume.html';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
