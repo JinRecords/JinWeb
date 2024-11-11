@@ -113,7 +113,7 @@ function typeWriter() {
     const phases = isMobile ? [
         {text: "Hello, World!", action: "type"},
         {text: "Hello,", action: "backspace"},
-        {text: "Hello, please use\ndesktop view.", action: "type"}
+        {text: "Hello, \nplease use\ndesktop view.", action: "type"}
     ] : [
         {text: "Hello, World!", action: "type"},
         {text: "Hello,", action: "backspace"},
@@ -567,6 +567,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const currentScrollPosition = window.pageYOffset;
         const navPosition = verticalNav.getBoundingClientRect().top;
         const windowHeight = window.innerHeight;
+        const scrollThreshold = windowHeight * 0.75;
 
         // Check scroll direction
         const isScrollingUp = currentScrollPosition < lastScrollPosition;
@@ -580,12 +581,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 messageShown = false; // Allow message to show again when scrolling down
             }, 500);
         }
+        if (navPosition < scrollThreshold &&
+            navPosition > 0 &&
+            !messageShown &&
+            !isScrollingUp &&
+            verticalNav.offsetHeight > 0) { // Ensure nav is actually visible
 
-        // Show message when nav is in view and scrolling down
-        if (navPosition < windowHeight && navPosition > 0 && !messageShown && !isScrollingUp) {
             infoMessage.style.display = 'block';
             infoMessage.style.opacity = '0';
-            // Fade in animation
             setTimeout(() => {
                 infoMessage.style.transition = 'opacity 0.5s ease';
                 infoMessage.style.opacity = '1';
