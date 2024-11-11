@@ -21,7 +21,6 @@ function isMobileDevice() {
            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
-// Add this to your DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', function() {
     const mainContent = document.getElementById('main-content');
 
