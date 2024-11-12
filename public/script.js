@@ -5,10 +5,12 @@ let phase = 0;
 const style = document.createElement('style');
 style.textContent = `
     .no-scroll {
-        overflow: hidden;
-        height: 100vh;
+        overflow: hidden !important;
+        height: 100% !important;
+        margin: 0 !important;
     }
 `;
+
 document.head.appendChild(style);
 
 window.onbeforeunload = function () {
@@ -18,10 +20,10 @@ window.onbeforeunload = function () {
 // Add this function to check for mobile devices
 function isMobileDevice() {
     return (window.innerWidth <= 768) ||
-           /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const mainContent = document.getElementById('main-content');
 
     function toggleParagraphVisibility() {
@@ -40,7 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-document.body.classList.add('no-scroll'); // Make body unscrollable initially
+document.body.classList.add('no-scroll');
+
 function updateArrowVisibility() {
     const arrow = document.querySelector('.arrow');
     const windowHeight = window.innerHeight;
@@ -65,32 +68,20 @@ function createArrow() {
     arrowElement.addEventListener('click', function () {
         const mainContent = document.getElementById('main-content');
         const verticalNav = document.querySelector('.vertical-nav');
-        const windowHeight = window.innerHeight;
-        const contentHeight = mainContent.offsetHeight;
         const currentScroll = window.scrollY;
-        const paragraphPosition = mainContent.offsetTop - (windowHeight - contentHeight) / 2;
-        const navPosition = verticalNav.offsetTop;
+        const windowHeight = window.innerHeight;
 
-        // If we haven't reached the main content yet, scroll to it
-        if (currentScroll < paragraphPosition * 0.9) {
-            window.scrollTo({
-                top: paragraphPosition,
-                behavior: 'smooth'
-            });
+        // If we're at the top, scroll to main content
+        if (currentScroll < windowHeight / 2) {
+            mainContent.scrollIntoView({behavior: 'smooth'});
         }
-        // If we're at main content but not at nav, scroll to nav
-        else if (currentScroll <= navPosition) {
-            window.scrollTo({
-                top: navPosition,
-                behavior: 'smooth'
-            });
+        // If we're at main content, scroll to nav
+        else if (currentScroll < windowHeight * 1.5) {
+            verticalNav.scrollIntoView({behavior: 'smooth'});
         }
-        // If we're already at nav, scroll to bottom
+        // If we're at nav, do nothing or scroll to top
         else {
-            window.scrollTo({
-                top: document.documentElement.scrollHeight,
-                behavior: 'smooth'
-            });
+            document.querySelector('.container').scrollIntoView({behavior: 'smooth'});
         }
     });
 
@@ -103,6 +94,30 @@ function createArrow() {
 
 // Add scroll event listener to update arrow visibility
 window.addEventListener('scroll', updateArrowVisibility);
+
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault(); // Prevent default scroll behavior
+
+        const sections = [
+            document.querySelector('.container'),
+            document.getElementById('main-content'),
+            document.querySelector('.nav-container')
+        ];
+
+        const currentSection = sections.findIndex(section => {
+            const rect = section.getBoundingClientRect();
+            return rect.top >= -window.innerHeight / 2 && rect.top <= window.innerHeight / 2;
+        });
+
+        if (e.key === 'ArrowDown' && currentSection < sections.length - 1) {
+            sections[currentSection + 1].scrollIntoView({behavior: 'smooth'});
+        } else if (e.key === 'ArrowUp' && currentSection > 0) {
+            sections[currentSection - 1].scrollIntoView({behavior: 'smooth'});
+        }
+    }
+});
+
 
 function showBackgroundVideo() {
     const videoContainer = document.querySelector('.video-container');
@@ -117,6 +132,35 @@ function showBackgroundVideo() {
         bgVideo.play();
     }, 10);
 }
+
+let isScrolling = false;
+document.addEventListener('wheel', function (e) {
+    if (!isScrolling) {
+        isScrolling = true;
+
+        const sections = [
+            document.querySelector('.container'),
+            document.getElementById('main-content'),
+            document.querySelector('.nav-container')
+        ];
+
+        const currentSection = sections.findIndex(section => {
+            const rect = section.getBoundingClientRect();
+            return rect.top >= -window.innerHeight / 2 && rect.top <= window.innerHeight / 2;
+        });
+
+        if (e.deltaY > 0 && currentSection < sections.length - 1) {
+            sections[currentSection + 1].scrollIntoView({behavior: 'smooth'});
+        } else if (e.deltaY < 0 && currentSection > 0) {
+            sections[currentSection - 1].scrollIntoView({behavior: 'smooth'});
+        }
+
+        setTimeout(() => {
+            isScrolling = false;
+        }, 1000); // Adjust this delay as needed
+    }
+}, {passive: false});
+
 
 function typeWriter() {
     const isMobile = isMobileDevice();
@@ -157,16 +201,21 @@ function typeWriter() {
             textElement.innerHTML = currentText.replace(/\n/g, '<br>');
             setTimeout(typeWriter, 100);
         } else {
-            if (!isMobile) {
-                setTimeout(() => {
-                    document.body.classList.remove('no-scroll');
-                    createArrow();
-                }, 500);
+            // Unhide body after animation completes
+            document.body.style.visibility = 'visible';
+
+            // Re-enable scroll snapping after animation completes
+            if (window.innerWidth > 1200) {
+                document.documentElement.style.scrollSnapType = 'y mandatory';
+            } else {
+                document.documentElement.style.scrollSnapType = 'none';
             }
+
+            // Optionally create an arrow or other elements after animation
+            createArrow();
         }
     }
 }
-
 
 
 window.addEventListener('resize', function () {
@@ -250,9 +299,40 @@ document.addEventListener('DOMContentLoaded', function () {
         window.open('https://github.com/JinRecords/JinWeb', '_blank');
     });
 
-        const soundcloudLink = document.querySelector('.soundcloud-link');
+    const soundcloudLink = document.querySelector('.soundcloud-link');
     soundcloudLink.addEventListener('click', function () {
         window.open('https://soundcloud.com/jin_records', '_blank');
+    });
+
+    // Disable scroll snapping initially
+    document.documentElement.style.scrollSnapType = 'none';
+
+    // Disable scrolling on mobile
+    if (isMobileDevice()) {
+        document.body.classList.add('no-scroll');
+    }
+
+    // Handle window resize to check if it's mobile or desktop
+    window.addEventListener('resize', function () {
+        if (isMobileDevice()) {
+            document.body.classList.add('no-scroll');
+            // Disable scroll snapping for mobile
+            document.documentElement.style.scrollSnapType = 'none';
+        } else {
+            document.body.classList.remove('no-scroll');
+            // Re-enable scroll snapping after typewriter animation completes
+            if (phase === 2) {
+                if (window.innerWidth > 1200) {
+                document.documentElement.style.scrollSnapType = 'y mandatory';
+            } else {
+                document.documentElement.style.scrollSnapType = 'none';
+            }
+                const arrow = document.querySelector('.arrow');
+                if (!arrow) {
+                    createArrow();
+                }
+            }
+        }
     });
 
     // Connect button functionality
@@ -570,6 +650,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const infoMessage = document.getElementById('info-message');
     const verticalNav = document.querySelector('.vertical-nav ul');
+    const projectNav = document.querySelector('.projects-section');
     let messageShown = false;
     let messageRemoved = false;
     let lastScrollPosition = window.pageYOffset;
@@ -620,6 +701,100 @@ document.addEventListener('DOMContentLoaded', function () {
                 infoMessage.style.display = 'none';
                 messageRemoved = true; // Prevent message from showing again
             }, 500);
+        }
+    });
+
+    projectNav.addEventListener('mouseenter', function () {
+        if (messageShown && !messageRemoved) {
+            infoMessage.style.opacity = '0';
+            setTimeout(() => {
+                infoMessage.style.display = 'none';
+                messageRemoved = true; // Prevent message from showing again
+            }, 500);
+        }
+    });
+
+    const projectsLink = document.querySelector('.vertical-nav li:first-child span');
+    const projectsSection = document.querySelector('.projects-section');
+    const connectLink = document.querySelector('.vertical-nav li:nth-child(2)'); // Assuming this is your connect link
+    const connectLinks = document.querySelector('.connect-links');
+    let isProjectsVisible = true; // Set to true by default
+    let isConnectVisible = false; // Set to false by default
+
+    // Function to show projects section
+    function showProjectsSection() {
+        projectsSection.style.display = 'block';
+        projectsSection.classList.add('fade-in');
+    }
+
+    // Function to hide projects section
+    function hideProjectsSection() {
+        projectsSection.style.display = 'none';
+        projectsSection.classList.remove('fade-in');
+    }
+
+    // Function to show connect links
+    function showConnectLinks() {
+        connectLinks.style.display = 'block';
+        connectLinks.classList.add('fade-in');
+        isConnectVisible = true;
+    }
+
+    // Function to hide connect links
+    function hideConnectLinks() {
+        connectLinks.classList.remove('fade-in');
+        connectLinks.classList.add('fade-out');
+        setTimeout(() => {
+            connectLinks.style.display = 'none';
+            connectLinks.classList.remove('fade-out');
+        }, 500);
+        isConnectVisible = false;
+    }
+
+    // Show projects section on page load
+    showProjectsSection();
+
+    // Click handler for the projects link
+    projectsLink.addEventListener('click', function () {
+        if (!isProjectsVisible) {
+            // Hide connect links if visible
+            if (isConnectVisible) {
+                hideConnectLinks();
+            }
+            // Show projects
+            showProjectsSection();
+            isProjectsVisible = true;
+        } else {
+            // Hide projects
+            hideProjectsSection();
+            isProjectsVisible = false;
+        }
+    });
+
+    // Click handler for the connect link
+    connectLink.addEventListener('click', function () {
+        if (!isConnectVisible) {
+            // Hide project section if visible
+            if (isProjectsVisible) {
+                hideProjectsSection();
+                isProjectsVisible = false;
+            }
+            // Show connect links
+            showConnectLinks();
+        } else {
+            // Hide connect links
+            hideConnectLinks();
+        }
+    });
+
+    // Global click listener to close sections when clicking outside of them
+    document.addEventListener('click', function (e) {
+        const target = e.target;
+
+
+        // Close connect links if clicking outside of them and they're visible
+        if (isConnectVisible && !connectLinks.contains(target) && !connectLink.contains(target)) {
+            hideConnectLinks();
         }
     });
 });

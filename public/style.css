@@ -1,5 +1,16 @@
+
+html {
+    scroll-snap-type: none;
+    scroll-behavior: smooth;
+}
+
+.scroll-container {
+    scroll-snap-type: y proximity; /* Enable snapping only in specific containers */
+}
+
 body {
     background-color: black;
+    visibility: hidden;
 }
 
 .container {
@@ -7,11 +18,13 @@ body {
 }
 
 h1 {
+    scroll-snap-align: start;
     color: white;
     font-family: 'Courier New', Courier, monospace;
     font-size: 3rem;
     white-space: nowrap;
     position: relative;
+    visibility: visible !important;
 }
 
 h1::after {
@@ -36,16 +49,44 @@ h1::after {
     }
 }
 
+
 #main-content {
     font-family: 'Courier New', Courier, monospace;
-    padding: 100px 0;
     text-align: center;
     font-size: 2rem;
     line-height: 1.6;
     color: #fff;
     background: none;
-    margin: 5% 20%;
+    height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
 }
+
+#main-content p {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+    line-height: 1.6;
+    color: #fff;
+    text-align: center;
+    max-width: 60%; /* Control the width of the text */
+    margin: 0 auto; /* Center horizontally */
+    position: relative; /* For precise positioning if needed */
+    transform: translateY(20vi); /* Adjust if needed for perfect centering */
+}
+
+/* For mobile devices */
+@media screen and (max-width: 768px) {
+    #main-content p {
+        max-width: 80%; /* Wider text container on mobile */
+        font-size: 1.5rem; /* Smaller font size on mobile */
+    }
+}
+
 
 .container {
     display: flex;
@@ -54,6 +95,8 @@ h1::after {
     align-items: center;
     height: 100vh;
     margin-bottom: 20px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 
 .arrow {
@@ -142,6 +185,7 @@ h1::after {
 }
 
 .nav-container {
+    scroll-snap-align: start;
     display: flex;
     align-items: flex-start;
     margin: 30% 0 20% 2%;
@@ -586,6 +630,10 @@ h1::after {
         flex-direction: row;
         align-items: flex-start;
     }
+
+html, body, .scroll-container {
+    scroll-snap-type: none !important;
+}
 }
 
 .play-icon {
